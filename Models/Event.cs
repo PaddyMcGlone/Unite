@@ -2,7 +2,7 @@ using System;
 
 namespace Unite.Models
 {
-    class Event
+    public class Event
     {
         public Guid EntityId { get; set; }
 

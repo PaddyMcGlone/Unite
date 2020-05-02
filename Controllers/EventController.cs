@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -55,6 +56,23 @@ namespace Unite.Controllers
                 return NotFound();
 
             return Ok(result);
+        }
+
+        [HttpPost]
+        public IActionResult Post(Event model)
+        {
+            if (model is null)
+                throw new ArgumentNullException(nameof(model));
+
+            bool hasEvent = List.Any(e => e.Name == model.Name);
+
+            if (hasEvent)
+                return Conflict("There is already an existing event");
+
+            List.Add(model);
+
+            var resourceUrl = Path.Combine(Request.Path.ToString(), Uri.EscapeUriString(model.Name));
+            return Created(resourceUrl, model);
         }
     }
 }
