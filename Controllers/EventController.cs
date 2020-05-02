@@ -7,7 +7,7 @@ namespace Unite.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class AddEventController : ControllerBase
+    public class EventController : ControllerBase
     {
         private static List<Event> events = new List<Event>
         {
